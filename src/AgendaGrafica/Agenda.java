@@ -15,21 +15,22 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 public class Agenda {
 	static Map<String, String> agenda = new TreeMap<String, String>();
-	
+	static String nombre = null, token = null;
 	public static String miAgenda (String comando) {
 		String resultado = null;
-		
 		Scanner s = new Scanner(comando);
-		String nombre = null, token = null, estado2 = null;
+		String estado2 = null;
 		int estado = 0;
 		
-		while (estado != 5) {
+		while (estado != 6) {
 			switch(estado) {
 				case 0:
 					try {
-						token = s.skip("buscar|borrar|\\p{L}+(\\s+\\p{L}+)*").match().group();
+						token = s.skip("buscar|borrar|limpiar|\\p{L}+(\\s+\\p{L}+)*").match().group();
 						if (token.equals("buscar")) {
 							estado2 = "buscar";
 							estado = 3;
@@ -38,13 +39,16 @@ public class Agenda {
 							estado2 = "borrar";
 							estado = 3;											
 						}
+						else if (token.equals("limpiar")) {
+							estado = 5;
+						}
 						else {
 							nombre = token;
 							estado = 1;
 						} 			
 					}catch (NoSuchElementException e) {
-						resultado = "Se esperaba buscar o borrar o un nombre";
-						estado = 5;
+						resultado = "Se esperaba buscar o borrar o limpiar o un nombre";
+						estado = 6;
 					}		
 					break;
 				case 1:
@@ -53,7 +57,7 @@ public class Agenda {
 						estado = 2;		
 					}catch (NoSuchElementException e) {
 						resultado = "Se esperaba un '-'";
-						estado = 5;
+						estado = 6;
 					}
 					break;
 				case 2:
@@ -67,10 +71,10 @@ public class Agenda {
 							agenda.put(nombre, token);
 							resultado = "Se ha registrado a " + nombre + " en la agenda";
 						}
-						estado = 5;		
+						estado = 6;		
 					}catch (NoSuchElementException e) {
 						resultado = "Se esperaba un número de telefono";
-						estado = 5;
+						estado = 6;
 					}
 					break;
 				case 3:
@@ -79,7 +83,7 @@ public class Agenda {
 						estado = 4;
 					}catch (NoSuchElementException e) {
 						resultado = "Se esperaba ':'";
-						estado = 5;
+						estado = 6;
 					}
 					break;
 				case 4:
@@ -98,11 +102,15 @@ public class Agenda {
 						else {
 							resultado = token + " no se encuentra en la agenda";
 						}
-						estado = 5;		
+						estado = 6;		
 					}catch (NoSuchElementException e) {
 						resultado = "Se esperaba un nombre";
-						estado = 5;
+						estado = 6;
 					}
+					break;
+				case 5:
+					Main.Borrar();
+					estado = 6;
 					break;
 			}
 		}
@@ -110,10 +118,12 @@ public class Agenda {
 		return resultado;
 	}
 	
+	static String absoluto = null;
 	public void cargarFichero(File fichero) {
 		FileReader fr = null;
+		absoluto = fichero.getAbsolutePath(); 
 		try {
-			fr = new FileReader(fichero);
+			fr = new FileReader(absoluto);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -121,35 +131,35 @@ public class Agenda {
 		String linea = null;
 		try {
 			while ((linea = br.readLine()) != null) {	
-				String[] contactos = linea.split("-");
+				String[] contactos = linea.split("-");				
 				agenda.put(contactos[0], contactos[1]);
-			}
 			br.close();
+			}
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
 	}
 	
-	public void guardarFichero(File fichero) {
+	public void guardarFichero(File file) {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter pw = null;
-		if (fichero == null) {
-			fw = null;
-			try {
-				fw = new FileWriter(fichero);
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
-			bw = new BufferedWriter(fw);
-			pw = new PrintWriter(bw);
-			Iterator<Entry<String, String>> contactos = Agenda.agenda.entrySet().iterator();
-			while (contactos.hasNext()) {
-				Map.Entry<String,String> entrada = contactos.next();
-				pw.println(entrada.getKey() + "-" + entrada.getValue());	
-			}
-			pw.close();
+		try {
+			if (absoluto != null)
+				fw = new FileWriter(absoluto);
+			else 
+				fw = new FileWriter(file);
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
-	}	
+		bw = new BufferedWriter(fw);
+		pw = new PrintWriter(bw);
+		Iterator<Entry<String, String>> contactos = Agenda.agenda.entrySet().iterator();
+		while (contactos.hasNext()) {
+			Map.Entry<String,String> entrada = contactos.next();
+			pw.println(entrada.getKey() + "-" + entrada.getValue());	
+		}
+		pw.close();
+	}
 }
 

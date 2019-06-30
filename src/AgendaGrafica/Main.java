@@ -9,16 +9,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -57,9 +51,13 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		JButton guardarComo = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/Save as.png")));
 		guardarComo.setActionCommand("GUARDARCOMO");
 		guardarComo.addActionListener(this);
+		JButton borrar = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/SinCara.png")));
+		borrar.setActionCommand("BORRAR");
+		borrar.addActionListener(this);
 		barraSuperior.add(abrir);
 		barraSuperior.add(guardar);
 		barraSuperior.add(guardarComo);
+		barraSuperior.add(borrar);
 		add(BorderLayout.NORTH, barraSuperior);
 		
 		ta = new JTextArea();
@@ -96,51 +94,59 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		String resultado = Agenda.miAgenda(tf.getText());
 		if (resultado != null) {
 			ta.append(resultado + "\n");
+			tf.setText("");
 		}
-		tf.setText("");
 	}
 	
-	public void Guardar(File fichero) {
-		
+	public void Guardar() {
+		if(Agenda.absoluto != null) {
+			agenda.guardarFichero(null);	
+			String resultado = "El fichero ha sido modificado";
+			ta.append(resultado + "\n");
+		}
+		else {
+			GuardarComo();
+		}
+	}
+	
+	public static void Borrar() {
+		ta.setText(" ");
 	}
 	
 	public void GuardarComo() {
 		JFileChooser guardarComo = new JFileChooser();
 		int seleccion = guardarComo.showOpenDialog(guardarComo);
-		if (seleccion == JFileChooser.APPROVE_OPTION)
+		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			agenda.guardarFichero(guardarComo.getSelectedFile());
-		
-		String resultado = "La agenda se ha guardado en un fichero nuevo";
-		ta.append(resultado + "\n");
-		tf.setText("");
+			String resultado = "La agenda se ha guardado en un fichero nuevo";
+			ta.append(resultado + "\n");
+		}
 	}
 	
 	public void AbrirFichero() {
 		JFileChooser abrirFichero = new JFileChooser();
 		int seleccion = abrirFichero.showOpenDialog(abrirFichero);
-		if (seleccion == JFileChooser.APPROVE_OPTION) 
-			agenda.cargarFichero(abrirFichero.getSelectedFile());
-		
-		String resultado = "Se ha cargado la agenda desde el fichero";
-		if (resultado != null) {
-			ta.append(resultado + "\n");
+		if (seleccion == JFileChooser.APPROVE_OPTION) {
+			agenda.cargarFichero(abrirFichero.getSelectedFile()); 		
+			String resultado = "Se ha cargado la agenda desde el fichero";
+			if (resultado != null) {
+				ta.append(resultado + "\n");
+			}
 		}
 		tf.setText("");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("EJECUTAR")) {
+		if (e.getActionCommand().equals("EJECUTAR")) 
 			EjecutarComando();
-		}
-		else if (e.getActionCommand().equals("GUARDAR")) {
-			
-		}
-		else if(e.getActionCommand().equals("GUARDARCOMO")) {
+		else if (e.getActionCommand().equals("GUARDAR")) 
+			Guardar();
+		else if(e.getActionCommand().equals("GUARDARCOMO")) 
 			GuardarComo();
-		}
-		else if (e.getActionCommand().equals("ABRIR")) {
+		else if (e.getActionCommand().equals("ABRIR")) 
 			AbrirFichero();
-		}
+		else if (e.getActionCommand().equals("BORRAR")) 
+			Borrar();
 	}
 
 	@Override
