@@ -35,23 +35,23 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 	
 	public Main () throws IOException {
 		super("Mi Agenda");
-		setIconImage(ImageIO.read(getClass().getResource("/AgendaGrafica/SinCara.png")));
+		setIconImage(ImageIO.read(getClass().getResource("/img/SinCara.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(500, 500);
 		setLocationRelativeTo(null);
 		addWindowListener(this);
 		
 		JToolBar barraSuperior = new JToolBar();		
-		JButton abrir = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/Open file.png")));
+		JButton abrir = new JButton(new ImageIcon(getClass().getResource("/img/Open file.png")));
 		abrir.setActionCommand("ABRIR");
 		abrir.addActionListener(this);
-		JButton guardar = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/Save.png")));
+		JButton guardar = new JButton(new ImageIcon(getClass().getResource("/img/Save.png")));
 		guardar.setActionCommand("GUARDAR");
 		guardar.addActionListener(this);
-		JButton guardarComo = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/Save as.png")));
+		JButton guardarComo = new JButton(new ImageIcon(getClass().getResource("/img/Save as.png")));
 		guardarComo.setActionCommand("GUARDARCOMO");
 		guardarComo.addActionListener(this);
-		JButton borrar = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/SinCara.png")));
+		JButton borrar = new JButton(new ImageIcon(getClass().getResource("/img/SinCara.png")));
 		borrar.setActionCommand("BORRAR");
 		borrar.addActionListener(this);
 		barraSuperior.add(abrir);
@@ -69,7 +69,7 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		barraInferior.setLayout(new BorderLayout());
 		tf = new JTextField();
 		tf.addKeyListener(this);
-		JButton ejecutar = new JButton(new ImageIcon(getClass().getResource("/AgendaGrafica/Play.png")));
+		JButton ejecutar = new JButton(new ImageIcon(getClass().getResource("/img/Play.png")));
 		ejecutar.setActionCommand("EJECUTAR");
 		ejecutar.addActionListener(this);
 		barraInferior.add(BorderLayout.CENTER, tf);
