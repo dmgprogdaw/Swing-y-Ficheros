@@ -20,6 +20,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -71,6 +72,9 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		ta.setFont(fuente);
 		add(BorderLayout.CENTER, ta);
 		
+		JScrollPane scroll= new JScrollPane(ta);
+		add(scroll);
+		
 		JPanel barraInferior = new JPanel();
 		barraInferior.setLayout(new BorderLayout());
 		tf = new JTextField();
@@ -119,6 +123,7 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 	
 	public static void Borrar() {
 		ta.setText(" ");
+		tf.setText("");
 	}
 	
 	public void GuardarComo() {

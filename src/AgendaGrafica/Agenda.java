@@ -13,11 +13,15 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import javax.swing.JOptionPane;
+
 import java.util.Map.Entry;
 
 public class Agenda {
 	static Map<String, String> agenda = new TreeMap<String, String>();
 	static String nombre = null, token = null;
+	static String telefono;
 	public static String miAgenda (String comando) {
 		String resultado = null;
 		Scanner s = new Scanner(comando);
@@ -87,7 +91,7 @@ public class Agenda {
 				case 4:
 					try {
 						token = s.skip("[a-zA-ZáéíóúÁÉÍÓÚ]+\\s+([a-zA-ZáéíóúÁÉÍÓÚ]+\\s+)*[a-zA-ZáéíóúÁÉÍÓÚ]+|[a-zA-ZáéíóúÁÉÍÓÚ]+").match().group();
-						String telefono = agenda.get(token);
+						telefono = agenda.get(token);
 						if (telefono != null) {
 							if (estado2.equals("buscar")) {
 								resultado = token + " -> " + telefono;
@@ -129,8 +133,15 @@ public class Agenda {
 		String linea = null;
 		try {
 			while ((linea = br.readLine()) != null) {	
-				String[] contactos = linea.split("-");				
-				agenda.put(contactos[0], contactos[1]);		
+				String[] contactos = linea.split("-");
+				if (contactos[0].equals(nombre)) {
+					int cargar = JOptionPane.showConfirmDialog(null, "¿Desea sustituirlo?", "El contacto " + nombre + " ya existe en la agenda", JOptionPane.YES_NO_OPTION);
+					if (cargar == JOptionPane.YES_OPTION)
+						agenda.put(contactos[0], contactos[1]);
+				}
+				else {
+					agenda.put(contactos[0], contactos[1]);
+				}
 			}
 			br.close();
 		} catch (IOException e2) {
