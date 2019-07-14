@@ -15,8 +15,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import javax.swing.JOptionPane;
-
 public class Agenda {
 	static Map<String, String> agenda = new TreeMap<String, String>();
 	static String nombre = null, token = null;
@@ -114,7 +112,7 @@ public class Agenda {
 					break;
 			}
 		}
-		
+		s.close();
 		return resultado;
 	}
 	
@@ -132,9 +130,9 @@ public class Agenda {
 		try {
 			while ((linea = br.readLine()) != null) {	
 				String[] contactos = linea.split("-");				
-				agenda.put(contactos[0], contactos[1]);
-			br.close();
+				agenda.put(contactos[0], contactos[1]);		
 			}
+			br.close();
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
