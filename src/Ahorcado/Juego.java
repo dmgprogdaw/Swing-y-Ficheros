@@ -7,30 +7,25 @@ import java.awt.FontFormatException;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.AncestorListener;
 
-public class Juego extends JPanel implements ActionListener, KeyListener {
+public class Juego extends JPanel implements ActionListener, MouseListener {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	Lienzo lienzo;
 	String letras = "abcdefghijklmnñopqrstuvwxyz";
@@ -66,9 +61,7 @@ public class Juego extends JPanel implements ActionListener, KeyListener {
 			b.setFont(font);
 			inf.add(b);
 			b.setEnabled(false);//Todas la letras estan deshabilitadas
-			b.addActionListener(this);
-			b.setActionCommand("JUGAR");
-		}
+		}		
 //		inf.add(new JButton("Jugar"));
 		JButton jugar = new JButton("Jugar");
 		jugar.setActionCommand("JUGAR");
@@ -82,13 +75,15 @@ public class Juego extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
-			b.setEnabled(true);
 			ArrayList<String> palabras = new ArrayList<String>();
 			FileReader fl = null;
 			try {
 				fl = new FileReader("C:/users/usuario/git/Swing-y-Ficheros/res/palabras.txt");
 			} catch (FileNotFoundException e2) {
-				System.out.println("El fichero no ha sido encontrado");
+				int respuesta = JOptionPane.showConfirmDialog(null, "Cierre el programa", "El fichero no ha sido encontrado", JOptionPane.CLOSED_OPTION);
+				if (respuesta == JOptionPane.YES_OPTION ) {
+					System.exit(0);
+				}
 			}
 			BufferedReader br = new BufferedReader(fl);
 			String linea = null;
@@ -101,31 +96,42 @@ public class Juego extends JPanel implements ActionListener, KeyListener {
 				Object array [] = palabras.toArray();
 				String palabraAzar = (String) array[r.nextInt(palabras.size())];
 				int cantidadLetras = palabraAzar.length();
-				String simbolo = " _ ";
 				for(int i=0; i<cantidadLetras; i++) {
-					System.out.print(simbolo);
-				}
-					
+					lblPalabra.setText(palabraAzar);
+				}				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		}	
+				
+		}
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
