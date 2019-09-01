@@ -126,10 +126,13 @@ public class Juego extends JPanel implements ActionListener{
 	}
 	
 	public void ganar() {
-//		if(lblPalabra.getText().contains("_")) {
-//			JOptionPane.showMessageDialog(lblPalabra, "HAS GANADO");
-//		}
-		if (lienzo.getFallos() == 11) {
+		if(lblPalabra.getText().contains(palabraAzar)) {
+			int mensaje = JOptionPane.showConfirmDialog(null, "AHORA BUSCA TRABAJO VAGO", "HAS GANADO EL JUEGO", JOptionPane.CLOSED_OPTION);
+			if (mensaje == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+		}
+		else if (lienzo.getFallos() == 11) {
 			int mensaje = JOptionPane.showConfirmDialog(null, "Cierre el Juego", "HAS PERDIDO EL JUEGO", JOptionPane.CLOSED_OPTION);
 			if (mensaje == JOptionPane.YES_OPTION) {
 				System.exit(0);
@@ -166,7 +169,7 @@ public class Juego extends JPanel implements ActionListener{
 					rayas += "_";
 					lblPalabra.setText(rayas);
 				}
-				System.out.println(palabraAzar);
+
 				A.setEnabled(true); G.setEnabled(true); M.setEnabled(true); R.setEnabled(true); X.setEnabled(true);
 				B.setEnabled(true); H.setEnabled(true); N.setEnabled(true); S.setEnabled(true); Y.setEnabled(true);
 				C.setEnabled(true); I.setEnabled(true); Ñ.setEnabled(true); T.setEnabled(true); Z.setEnabled(true);
