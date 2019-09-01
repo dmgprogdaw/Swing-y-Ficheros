@@ -144,7 +144,7 @@ public class Juego extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
 			jugar.setEnabled(false);
-			String ruta = "/res/palabras.txt";
+			String ruta = "res/palabras.txt";
 			ArrayList<String> palabras = new ArrayList<String>();
 			FileReader fl = null;
 			try {
