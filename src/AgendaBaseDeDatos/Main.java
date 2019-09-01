@@ -125,9 +125,6 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 							case Types.INTEGER:
 								linea = linea + rs.getInt(i);
 								break;
-							case Types.CHAR:
-								linea = linea + rs.getString(i);
-								break;
 						}
 						ta.append(linea);
 					}
