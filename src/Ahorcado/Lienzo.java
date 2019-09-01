@@ -20,7 +20,6 @@ public class Lienzo extends JPanel {
 	private static final BasicStroke solido = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER);
 	private static final BasicStroke discontinuo = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, patron, 0);	
 	
-	private Juego juego;
 	private Shape [] shapes;
 	int fallos = 0;
 	
@@ -43,13 +42,9 @@ public class Lienzo extends JPanel {
 	public void incFallos() {
 		fallos++;
 		repaint();
-		
-		if (fallos >= 11) {
-			int mensaje = JOptionPane.showConfirmDialog(null, "Cierre el Juego", "HAS PERDIDO EL JUEGO", JOptionPane.CLOSED_OPTION);
-			if (mensaje == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
-		}
+	}
+	public int getFallos() {
+		return fallos;
 	}
 	
 	public void reset() {

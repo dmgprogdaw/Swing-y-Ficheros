@@ -116,6 +116,27 @@ public class Juego extends JPanel implements ActionListener{
 		add(inf, BorderLayout.SOUTH);
 	}
 	
+	public static String escribirLetra(String s, int num, char c) {
+		char[] palabraOculta = new char[s.length()];
+		String palabraCorrecta;
+		palabraOculta = s.toCharArray();
+		palabraOculta[num] = c;
+		palabraCorrecta = new String(palabraOculta);
+		return palabraCorrecta;
+	}
+	
+	public void ganar() {
+//		if(lblPalabra.getText().contains("_")) {
+//			JOptionPane.showMessageDialog(lblPalabra, "HAS GANADO");
+//		}
+		if (lienzo.getFallos() == 11) {
+			int mensaje = JOptionPane.showConfirmDialog(null, "Cierre el Juego", "HAS PERDIDO EL JUEGO", JOptionPane.CLOSED_OPTION);
+			if (mensaje == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
@@ -135,15 +156,14 @@ public class Juego extends JPanel implements ActionListener{
 			String linea = null;
 			try {
 				while ((linea = br.readLine()) != null) {
-					String palabra = linea;
-					palabras.add(palabra);
+					palabras.add(linea);
 				}
 				Random r = new Random();
 				Object array [] = palabras.toArray();
 				palabraAzar = (String) array[r.nextInt(palabras.size())];
 				cantidadLetras = palabraAzar.length();
 				for(int i=0; i<cantidadLetras; i++) {
-					rayas += "_ ";
+					rayas += "_";
 					lblPalabra.setText(rayas);
 				}
 				System.out.println(palabraAzar);
@@ -158,250 +178,357 @@ public class Juego extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
-
+		int cont = 0;
 		if (e.getActionCommand().equals("A")) {
-			A.setEnabled(false); 
-			if(palabraAzar.contains("a") | palabraAzar.contains("á")){
-				
+			A.setEnabled(false); 			
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'a' | palabraAzar.charAt(i) == 'á') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'a'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("B")) {
 			B.setEnabled(false);
-			if(palabraAzar.contains("b")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'b') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'b'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("C")) {
 			C.setEnabled(false);
-			if(palabraAzar.contains("c")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'c') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'c'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("D")) {
 			D.setEnabled(false);
-			if(palabraAzar.contains("d")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'd') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'd'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("E")) {
 			E.setEnabled(false);
-			if(palabraAzar.contains("e") | palabraAzar.contains("é")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'e' | palabraAzar.charAt(i) == 'é') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'e'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("F")) {
 			F.setEnabled(false);
-			if(palabraAzar.contains("f")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'f') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'f'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("G")) {
 			G.setEnabled(false);
-			if(palabraAzar.contains("g")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'g') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'g'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("H")) {
 			H.setEnabled(false);
-			if(palabraAzar.contains("h")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'h') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'h'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("I")) {
 			I.setEnabled(false);
-			if(palabraAzar.contains("i") | palabraAzar.contains("í")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'i' | palabraAzar.charAt(i) == 'í') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'i'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("J")) {
 			J.setEnabled(false);
-			if(palabraAzar.contains("j")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'j') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'j'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("K")) {
 			K.setEnabled(false);
-			if(palabraAzar.contains("k")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'k') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'k'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("L")) {
 			L.setEnabled(false);
-			if(palabraAzar.contains("l")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'l') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'l'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("M")) {
 			M.setEnabled(false);
-			if(palabraAzar.contains("m")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'm') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'm'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("N")) {
 			N.setEnabled(false);
-			if(palabraAzar.contains("n")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'n') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'n'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("Ñ")) {
 			Ñ.setEnabled(false);
-			if(palabraAzar.contains("Ñ")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'ñ') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'ñ'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("O")) {
 			O.setEnabled(false);
-			if(palabraAzar.contains("o") | palabraAzar.contains("ó")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'o' | palabraAzar.charAt(i) == 'ó') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'o'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("P")) {
 			P.setEnabled(false);
-			if(palabraAzar.contains("p")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'p') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'p'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("Q")) {
 			Q.setEnabled(false);
-			if(palabraAzar.contains("q")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'q') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'q'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("R")) {
 			R.setEnabled(false);
-			if(palabraAzar.contains("r")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'r') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'r'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("S")) {
 			S.setEnabled(false);
-			if(palabraAzar.contains("s")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 's') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 's'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("T")) {
 			T.setEnabled(false);
-			if(palabraAzar.contains("t")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 't') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 't'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("U")) {
 			U.setEnabled(false);
-			if(palabraAzar.contains("u") | palabraAzar.contains("ü") | palabraAzar.contains("ú")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'u' | palabraAzar.charAt(i) == 'ú' | palabraAzar.charAt(i) == 'ü') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'u'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("V")) {
 			V.setEnabled(false);
-			if(palabraAzar.contains("W")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'v') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'v'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("W")) {
 			W.setEnabled(false);
-			if(palabraAzar.contains("w")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'w') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'w'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("X")) {
 			X.setEnabled(false);
-			if(palabraAzar.contains("x")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'x') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'x'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("Y")) {
 			Y.setEnabled(false);
-			if(palabraAzar.contains("y")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'y') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'y'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 		else if (e.getActionCommand().equals("Z")) {
 			Z.setEnabled(false);
-			if(palabraAzar.contains("z")){	
-				
+			for (int i=0; i<palabraAzar.length(); i++) {
+				if(palabraAzar.charAt(i) == 'z') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'z'));
+					cont++;
+				}
 			}
-			else {
+			if (cont == 0) {
 				lienzo.incFallos();
 			}
+			ganar();
 		}
 	}
 }
-
