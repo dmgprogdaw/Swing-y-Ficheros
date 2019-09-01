@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -144,16 +145,15 @@ public class Juego extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
 			jugar.setEnabled(false);
-			String ruta = "C:/users/usuario/git/Swing-y-Ficheros/res/palabras.txt/palabras.txt";
+			String ruta = "/res/palabras.txt";
 			ArrayList<String> palabras = new ArrayList<String>();
 			FileReader fl = null;
 			try {
-				fl = new FileReader(ruta);/*Esta ruta absoluta me funciona en el ordenador de casa, si se esta probando en
-			otro ordenador hay que cambiar la carpeta de usuario. C:/users/carpeta_de_usuario_del_ordenador_donde_se_prueba/git/Swing-y-Ficheros/res/palabras.txt.*/
+				fl = new FileReader(ruta);
 			} catch (FileNotFoundException e2) {
-				int respuesta = JOptionPane.showConfirmDialog(null, "Introduce la ruta manualmente", "El fichero con las palabras no ha sido encontrado", JOptionPane.CLOSED_OPTION);
+				int respuesta = JOptionPane.showConfirmDialog(null, "Introduce la ruta manualmente", "El fichero palabras.txt no se encuenntra", JOptionPane.CLOSED_OPTION);
 				if (respuesta == JOptionPane.YES_OPTION ) {
-					String res = JOptionPane.showInputDialog("Introduce la ruta");
+					String res =  JOptionPane.showInputDialog("Introduce la ruta del fichero palabras.txt");
 					ruta = res;
 					try {
 						fl = new FileReader(ruta);
