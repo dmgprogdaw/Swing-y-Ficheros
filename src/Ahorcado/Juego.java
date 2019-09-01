@@ -144,15 +144,23 @@ public class Juego extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
 			jugar.setEnabled(false);
+			String ruta = "C:/users/usuario/git/Swing-y-Ficheros/res/palabras.txt/palabras.txt";
 			ArrayList<String> palabras = new ArrayList<String>();
 			FileReader fl = null;
 			try {
-				fl = new FileReader("C:/users/usuario/git/Swing-y-Ficheros/res/palabras.txt");/*Esta ruta absoluta me funciona en el ordenador de casa, si se esta probando en
+				fl = new FileReader(ruta);/*Esta ruta absoluta me funciona en el ordenador de casa, si se esta probando en
 			otro ordenador hay que cambiar la carpeta de usuario. C:/users/carpeta_de_usuario_del_ordenador_donde_se_prueba/git/Swing-y-Ficheros/res/palabras.txt.*/
 			} catch (FileNotFoundException e2) {
-				int respuesta = JOptionPane.showConfirmDialog(null, "Cierre el juego", "El fichero con las palabras no ha sido encontrado", JOptionPane.CLOSED_OPTION);
+				int respuesta = JOptionPane.showConfirmDialog(null, "Introduce la ruta manualmente", "El fichero con las palabras no ha sido encontrado", JOptionPane.CLOSED_OPTION);
 				if (respuesta == JOptionPane.YES_OPTION ) {
-					System.exit(0);
+					String res = JOptionPane.showInputDialog("Introduce la ruta");
+					ruta = res;
+					try {
+						fl = new FileReader(ruta);
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 			BufferedReader br = new BufferedReader(fl);

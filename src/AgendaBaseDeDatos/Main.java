@@ -69,9 +69,15 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		barraInferior.add(BorderLayout.CENTER, tf);
 		barraInferior.add(BorderLayout.EAST, ejecutar);
 		add(BorderLayout.SOUTH, barraInferior);
+
+		String usuario = null, contraseña = null;
+		String url = "jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String res = JOptionPane.showInputDialog("Introduce el usuario:");
+		usuario = res;
+		String res2 = JOptionPane.showInputDialog( "Introduce la contraseña:");
+		contraseña = res2;
+
 		
-		
-		String url = "jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", usuario = "root", contraseña = "Zuko";
 		try {
 			conexion = DriverManager.getConnection(url, usuario, contraseña);
 		} catch (SQLException e) {
