@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
