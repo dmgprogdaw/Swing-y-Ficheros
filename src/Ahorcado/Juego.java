@@ -192,8 +192,12 @@ public class Juego extends JPanel implements ActionListener{
 		if (e.getActionCommand().equals("A")) {
 			A.setEnabled(false); 			
 			for (int i=0; i<palabraAzar.length(); i++) {
-				if(palabraAzar.charAt(i) == 'a' | palabraAzar.charAt(i) == 'á') {
+				if(palabraAzar.charAt(i) == 'a') {
 					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'a'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'á') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'á'));
 					cont++;
 				}
 			}
@@ -244,8 +248,12 @@ public class Juego extends JPanel implements ActionListener{
 		else if (e.getActionCommand().equals("E")) {
 			E.setEnabled(false);
 			for (int i=0; i<palabraAzar.length(); i++) {
-				if(palabraAzar.charAt(i) == 'e' | palabraAzar.charAt(i) == 'é') {
+				if(palabraAzar.charAt(i) == 'e') {
 					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'e'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'é') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'é'));
 					cont++;
 				}
 			}
@@ -296,8 +304,12 @@ public class Juego extends JPanel implements ActionListener{
 		else if (e.getActionCommand().equals("I")) {
 			I.setEnabled(false);
 			for (int i=0; i<palabraAzar.length(); i++) {
-				if(palabraAzar.charAt(i) == 'i' | palabraAzar.charAt(i) == 'í') {
+				if(palabraAzar.charAt(i) == 'i') {
 					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'i'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'í') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'í'));
 					cont++;
 				}
 			}
@@ -387,8 +399,12 @@ public class Juego extends JPanel implements ActionListener{
 		else if (e.getActionCommand().equals("O")) {
 			O.setEnabled(false);
 			for (int i=0; i<palabraAzar.length(); i++) {
-				if(palabraAzar.charAt(i) == 'o' | palabraAzar.charAt(i) == 'ó') {
+				if(palabraAzar.charAt(i) == 'o') {
 					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'o'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'ó') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'ó'));
 					cont++;
 				}
 			}
@@ -465,8 +481,16 @@ public class Juego extends JPanel implements ActionListener{
 		else if (e.getActionCommand().equals("U")) {
 			U.setEnabled(false);
 			for (int i=0; i<palabraAzar.length(); i++) {
-				if(palabraAzar.charAt(i) == 'u' | palabraAzar.charAt(i) == 'ú' | palabraAzar.charAt(i) == 'ü') {
+				if(palabraAzar.charAt(i) == 'u') {
 					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'u'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'ú') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'ú'));
+					cont++;
+				}
+				if(palabraAzar.charAt(i) == 'ü') {
+					lblPalabra.setText(escribirLetra(lblPalabra.getText(), i, 'ü'));
 					cont++;
 				}
 			}
