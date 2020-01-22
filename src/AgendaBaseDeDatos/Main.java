@@ -71,7 +71,7 @@ public class Main extends JFrame implements ActionListener, KeyListener, WindowL
 		add(BorderLayout.SOUTH, barraInferior);
 
 		String usuario = null, contraseña = null;
-		String url = "jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String url = "jdbc:mysql://localhost:3306/AgendaGrafica?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String res = JOptionPane.showInputDialog("Introduce el usuario:");
 		usuario = res;
 		String res2 = JOptionPane.showInputDialog( "Introduce la contraseña:");
