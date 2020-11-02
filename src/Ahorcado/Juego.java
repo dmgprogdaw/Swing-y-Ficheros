@@ -34,7 +34,7 @@ public class Juego extends JPanel implements ActionListener{
 	private JPanel inf;
 	private int cantidadLetras;
 	private JButton jugar, A , B, C, D, E, F, G, H, I, J, K, L, M, N, Ñ, O, P, Q, R, S, T, U, V, W, X, Y, Z;
-	private String rayas ="";
+	private String rayas;
 	
 	public Juego(Lienzo lienzo) throws FontFormatException, IOException {
 		this.lienzo = lienzo;
@@ -128,65 +128,84 @@ public class Juego extends JPanel implements ActionListener{
 	public void ganar() {
 		if(lblPalabra.getText().contains(palabraAzar)) {
 			int mensaje = JOptionPane.showConfirmDialog(null, "AHORA BUSCA TRABAJO VAGO", "HAS GANADO EL JUEGO", JOptionPane.CLOSED_OPTION);
-			if (mensaje == JOptionPane.YES_OPTION) {
-				System.exit(0);
+			if (mensaje == JOptionPane.OK_OPTION) {
+				int mensaje2 = JOptionPane.showConfirmDialog(null, "¿Deseas reiniciar el juego?", "HAS GANADO EL JUEGO", JOptionPane.YES_NO_OPTION);
+				if (mensaje2 == JOptionPane.YES_OPTION) {
+					lienzo.reset();
+					rayas = "";
+					iniciarJuego();
+				}
+				else
+					System.exit(0);
 			}
 		}
 		else if (lienzo.getFallos() == 11) {
-			int mensaje = JOptionPane.showConfirmDialog(null, "Cierre el Juego", "HAS PERDIDO EL JUEGO", JOptionPane.CLOSED_OPTION);
-			if (mensaje == JOptionPane.YES_OPTION) {
-				System.exit(0);
+			int mensaje = JOptionPane.showConfirmDialog(null, "APRENDE A JUGAR", "HAS PERDIDO EL JUEGO", JOptionPane.CLOSED_OPTION);
+			if (mensaje == JOptionPane.OK_OPTION) {
+				int mensaje2 = JOptionPane.showConfirmDialog(null, "¿Deseas reiniciar el juego?", "HAS GANADO EL JUEGO", JOptionPane.YES_NO_OPTION);
+				if (mensaje2 == JOptionPane.YES_OPTION) {
+					iniciarJuego();		
+				}
+				else
+					System.exit(0);
 			}
+			
+		}
+	}
+	
+	public void iniciarJuego() {
+		lienzo.reset();
+		rayas = "";
+		jugar.setEnabled(false);
+		String ruta = "res/palabras.txt";
+		ArrayList<String> palabras = new ArrayList<String>();
+		FileReader fl = null;
+		try {
+			fl = new FileReader(ruta);
+		} catch (FileNotFoundException e2) {
+			int respuesta = JOptionPane.showConfirmDialog(null, "Introduce la ruta manualmente", "El fichero palabras.txt no se encuenntra", JOptionPane.CLOSED_OPTION);
+			if (respuesta == JOptionPane.YES_OPTION ) {
+				String res =  JOptionPane.showInputDialog("Introduce la ruta del fichero palabras.txt");
+				ruta = res;
+				try {
+					fl = new FileReader(ruta);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		BufferedReader br = new BufferedReader(fl);
+		String linea = null;
+		try {
+			while ((linea = br.readLine()) != null) {
+				palabras.add(linea);
+			}
+			Random r = new Random();
+			Object array [] = palabras.toArray();
+			palabraAzar = (String) array[r.nextInt(palabras.size())];
+			cantidadLetras = palabraAzar.length();
+			for(int i=0; i<cantidadLetras; i++) {
+				rayas += "_";
+				lblPalabra.setText(rayas);
+			}
+
+			A.setEnabled(true); G.setEnabled(true); M.setEnabled(true); R.setEnabled(true); X.setEnabled(true);
+			B.setEnabled(true); H.setEnabled(true); N.setEnabled(true); S.setEnabled(true); Y.setEnabled(true);
+			C.setEnabled(true); I.setEnabled(true); Ñ.setEnabled(true); T.setEnabled(true); Z.setEnabled(true);
+			D.setEnabled(true); J.setEnabled(true); O.setEnabled(true); U.setEnabled(true);
+			E.setEnabled(true); K.setEnabled(true); P.setEnabled(true); V.setEnabled(true);
+			F.setEnabled(true); L.setEnabled(true); Q.setEnabled(true); W.setEnabled(true);
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("JUGAR")) {
-			jugar.setEnabled(false);
-			String ruta = "res/palabras.txt";
-			ArrayList<String> palabras = new ArrayList<String>();
-			FileReader fl = null;
-			try {
-				fl = new FileReader(ruta);
-			} catch (FileNotFoundException e2) {
-				int respuesta = JOptionPane.showConfirmDialog(null, "Introduce la ruta manualmente", "El fichero palabras.txt no se encuenntra", JOptionPane.CLOSED_OPTION);
-				if (respuesta == JOptionPane.YES_OPTION ) {
-					String res =  JOptionPane.showInputDialog("Introduce la ruta del fichero palabras.txt");
-					ruta = res;
-					try {
-						fl = new FileReader(ruta);
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			}
-			BufferedReader br = new BufferedReader(fl);
-			String linea = null;
-			try {
-				while ((linea = br.readLine()) != null) {
-					palabras.add(linea);
-				}
-				Random r = new Random();
-				Object array [] = palabras.toArray();
-				palabraAzar = (String) array[r.nextInt(palabras.size())];
-				cantidadLetras = palabraAzar.length();
-				for(int i=0; i<cantidadLetras; i++) {
-					rayas += "_";
-					lblPalabra.setText(rayas);
-				}
-
-				A.setEnabled(true); G.setEnabled(true); M.setEnabled(true); R.setEnabled(true); X.setEnabled(true);
-				B.setEnabled(true); H.setEnabled(true); N.setEnabled(true); S.setEnabled(true); Y.setEnabled(true);
-				C.setEnabled(true); I.setEnabled(true); Ñ.setEnabled(true); T.setEnabled(true); Z.setEnabled(true);
-				D.setEnabled(true); J.setEnabled(true); O.setEnabled(true); U.setEnabled(true);
-				E.setEnabled(true); K.setEnabled(true); P.setEnabled(true); V.setEnabled(true);
-				F.setEnabled(true); L.setEnabled(true); Q.setEnabled(true); W.setEnabled(true);
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			iniciarJuego();
 		}
 		int cont = 0;
 		if (e.getActionCommand().equals("A")) {
